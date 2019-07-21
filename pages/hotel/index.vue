@@ -73,7 +73,9 @@
             </el-row>
           </el-col>
           <el-col :span="10">
-            <div class="map-box"></div>
+              <!-- Map -->
+              <Map />
+            
           </el-col>
         </el-row>
       </div>
@@ -85,10 +87,12 @@
 <script>
 import HotelSearch from '@/components/hotel/hotelSearch'
 import HotelListFilter from '@/components/hotel/hotelListFilter'
+import Map from '@/components/hotel/map2'
 export default {
   components: {
     HotelSearch,
-    HotelListFilter
+    HotelListFilter,
+    Map
   }
 }
 </script>
@@ -141,12 +145,12 @@ export default {
           }
         }
         // 地图
-        .map-box {
-          width: 420px;
-          height: 260px;
-          margin-left: 20px;
-          border: 1px solid #000;
-        }
+        // .map-box {
+        //   width: 420px;
+        //   height: 260px;
+        //   margin-left: 20px;
+        //   border: 1px solid #000;
+        // }
       }
     }
   }
