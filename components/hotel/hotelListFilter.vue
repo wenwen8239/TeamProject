@@ -9,58 +9,34 @@
           <span style="float:right;">0-4000</span>
         </div>
         <!-- 滑块 -->
-        <el-slider v-model="priceRange" :format-tooltip="formatTooltip" @change="handleChangePrice"></el-slider>
+        <el-slider v-model="priceRange" :max='4000' @change="handleChangePrice"></el-slider>
       </el-col>
       <!-- 住宿等级 -->
       <el-col :span="5">
         <div>住宿等级</div>
-        <el-select v-model="grade" placeholder="不限">
-          <el-option
-            v-for="(item,index) in start"
-            :key="index"
-            :label="item"
-            :value="item">
-            <span style="float: left">{{ start[index] }}</span>
-          </el-option>
+        <el-select v-model="levels" placeholder="不限" @change="handleLevelChange">
+          <el-option v-for="(item,index) in filtersData.levels" :key="index" :label="item.name" :value="item.level"></el-option>
         </el-select>
       </el-col>
       <!-- 住宿类型 -->
       <el-col :span="5">
         <div>住宿类型</div>
-        <el-select v-model="type" placeholder="不限">
-          <el-option
-            v-for="(item,index) in types"
-            :key="index"
-            :label="item"
-            :value="item">
-            <span style="float: left">{{ types[index] }}</span>
-          </el-option>
+        <el-select v-model="type" placeholder="不限" @change="handleChangeType">
+          <el-option v-for="(item,index) in filtersData.types" :key="index" :label="item.name" :value="item.id"></el-option>
         </el-select>
       </el-col>
       <!-- 酒店设施 -->
       <el-col :span="5">
         <div>酒店设施</div>
-        <el-select v-model="facility" placeholder="不限">
-          <el-option
-            v-for="(item,index) in types"
-            :key="index"
-            :label="item"
-            :value="item">
-            <span style="float: left">{{ facilitys[index] }}</span>
-          </el-option>
+        <el-select v-model="assets" placeholder="不限">
+          <el-option v-for="(item,index) in filtersData.assets" :key="index" :label="item.name" :value="item.id"></el-option>
         </el-select>
       </el-col>
       <!-- 酒店品牌 -->
       <el-col :span="4">
         <div>酒店品牌</div>
-        <el-select v-model="facility" placeholder="不限">
-          <el-option
-            v-for="(item,index) in types"
-            :key="index"
-            :label="item"
-            :value="item">
-            <span style="float: left">{{ facilitys[index] }}</span>
-          </el-option>
+        <el-select v-model="brands" placeholder="不限">
+          <el-option v-for="(item,index) in filtersData.brands" :key="index" :label="item.name" :value="item.id"></el-option>
         </el-select>
       </el-col>
     </el-row>
@@ -69,28 +45,49 @@
 
 <script>
 export default {
+  prop: {
+    data: {
+      type: Array,
+      default: []
+    }
+  },
   data() {
     return {
       priceRange: 4000,
-      grade: '',
+      levels: '',
       type: '',
-      facility: '',
-      start: ['1星','2星','3星','4星','5星'],
-      types: ['经济型','舒适型','高档型','豪华型','度假村','公寓式酒店'],
-      facilitys: ['wifi','热水壶','吹风机','外币兑换服务','洗衣服务','电梯']
+      assets: '',
+      brands: '',
+      filtersData: {}
     }
   },
+  mounted() {
+    this.$axios({
+      url: '/hotels/options'
+    })
+    .then(res => {
+      console.log(res,12345678)
+      const {data} = res.data;
+      this.filtersData = data
+      console.log(data)
+    })
+  },
   methods: {
-    formatTooltip(val) {
-      return val * 40;
-    },
     // 拖动滑块更改价格
     handleChangePrice(value) {
       console.log(value)
+      this.$emit('changePrice',value)
+    },
+    // 切换酒店等级
+    handleLevelChange(value) {
+      console.log(value)
+      this.$emit('changeLevel',value)
+    },
+    // 切换酒店类型
+    handleChangeType(value) {
+      console.log(value)
+      this.$emit('changeType',value)
     }
-  },
-  mounted () {
-
   }
 }
 </script>

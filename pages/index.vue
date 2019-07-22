@@ -64,7 +64,7 @@ export default {
       .then(res => {
         const cityId = res.data.data[0].id;
         // console.log(cityId)
-        // this.$store.commit('setCityId',cityId);
+        this.$store.commit('hotel/setCityId',cityId);
       })
     }
   },

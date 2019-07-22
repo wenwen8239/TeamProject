@@ -77,8 +77,10 @@ export default {
   },
   data() {
     return {
+      stats: 0
     }
   },
+
   mounted() {
 
   },

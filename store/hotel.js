@@ -1,30 +1,35 @@
 // 存数据
 // 酒店信息
 export const state = () => ({
-  cityId: 0
+  city: '',
+  cityId: 0,
+  totle:0
 })
 // 同步设置修改state数据
 export const mutations = {
+  setCity(state,data) {
+    state.city = data
+  },
   setCityId(state,data) {
     state.cityId = data
+  },
+  setTotle(state,data){
+    state.totle = data
   }
 }
 // 异步设置修改state数据
 export const actions = {
-  // 封装获取景点
-  getAllScenics(store,name) {
-    // 获取城市景点
+  // 获取所有酒店数据
+  getAllHotel({commit},id) {
     return this.$axios({
-      url: '/cities',
+      url: '/hotels',
       params: {
-        name
+        city: id
       }
     })
     .then(res => {
-      console.log(res)
-      // this.scenics = res.data.data[0].scenics
-      // this.scenicsLength = res.data.data[0].scenics.length
-      return res.data
+      const {total} = res.data
+      commit('setTotal',total)
     })
   }
 }

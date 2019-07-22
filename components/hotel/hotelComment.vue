@@ -33,7 +33,7 @@ export default {
     }
   },
   mounted() {
-    console.log(parseInt(this.$route.query.id))
+    // console.log(parseInt(this.$route.query.id))
     this.$axios({
       url: '/hotels/comments',
       params: {
@@ -41,7 +41,7 @@ export default {
       }
     })
     .then(res => {
-      console.log(res,12345)
+      // console.log(res,12345)
     })
   }
 }

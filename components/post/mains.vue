@@ -1,7 +1,7 @@
 <template>
   <div class="mians">
     <el-row type="flex" class="shuru" justify="space-between">
-      <input class="shuchu" type="text" placeholder="请输入想去的地方，比如：'广州'" 
+      <input class="shuchu" type="text" placeholder="请输入想去的地方，比如：'广州'"
       @keyup.enter="submit"
        v-model="ValueCity"/>
       <nuxt-link :to='`/post?city=${this.ValueCity}`' class="el-icon-search icon"></nuxt-link>
@@ -9,9 +9,9 @@
     <!-- `/post?city=${item2.city}` -->
     <div class="mians_tuijian" >
       <span>推荐:</span>
-      <nuxt-link 
+      <nuxt-link
       :to="`/post?city=${item.city}`"
-      v-for="(item,index) in mainsCity" 
+      v-for="(item,index) in mainsCity"
       :key="index"
       >{{item.city}}</nuxt-link>
       <!-- <nuxt-link to="#">上海</nuxt-link>
@@ -95,7 +95,7 @@ export default {
   }
 }
 .mians_gonglie {
-  // padding-bottom: 10px; 
+  // padding-bottom: 10px;
   border-bottom: 1px solid #ddd;
   h4 {
     height: 50px;

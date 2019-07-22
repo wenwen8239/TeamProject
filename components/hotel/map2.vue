@@ -1,13 +1,13 @@
 <template>
 <!-- 测试1 -->
-  
-    <el-row type="flex"> 
+
+    <el-row type="flex">
       <el-col :span="16"><div id="container"></div></el-col>
       <el-col :span="8"><BusMarker /></el-col>
-    </el-row> 
- 
-   
-  
+    </el-row>
+
+
+
 </template>
 
 <script>
@@ -27,31 +27,31 @@ export default {
        this.$axios({
         url: "/hotels?city=74"
       }).then(res => {
-        console.log(res.data.data);
+        // console.log(res.data.data);
         const { data } = res.data;
         // var arr = [];
         data.forEach(e => {
-          console.log(e.location);
+          // console.log(e.location);
           this.arr.push(e.location);
         });
         // return arr
-        
+
       });
     }
   },
   mounted() {
     // setTimeout(()=>{
-        
+
     // },500)
     this.getmaps()
-    console.log(this.arr, 'ftdhthssss')
+    // console.log(this.arr, 'ftdhthssss')
     window.onLoad = function() {
       var map = new AMap.Map("container", {
         zoom: 11, //级别
         center: [118.8718107, 31.32846821], //中心点坐标
         viewMode: "3D" //使用3D视图
       });
-      
+
       for (var i = 0; i < this.arr.length; i++) {
           var long = [this.arr[i].longitude, this.arr[i].latitude];
          return marker = new AMap.Marker({
@@ -60,7 +60,7 @@ export default {
             // map: map
           });
         }
-       
+
     //  var  setMark = this.arr.for(ele => {
     //    var long = [ele.longitude, ele.latitude];
     //    marker = new AMap.Marker({
@@ -100,7 +100,7 @@ export default {
 
 <style lang="less" scoped>
 #container {
-  margin-left: 20px;
+  // margin-left: 20px;
   // width: 520px;
   height: 460px;
 }

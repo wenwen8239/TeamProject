@@ -72,7 +72,7 @@
         </el-row>
       </div>
       <!-- 引入酒店条件筛选模块 -->
-      <HotelListFilter/>
+      <HotelListFilter @changePrice="changePrice" @changeLevel="changeLevel" @changeType="changeType"/>
       <!-- 引入酒店列表模块 -->
       <HotelList v-for="(item,index) in dataList" :key="index" :data="item" v-loading="loading"/>
       <!-- 实现分页功能 -->
@@ -121,7 +121,7 @@ export default {
     }
   },
   computed: {
-    // 实现分页
+    // 实现页面分页
     dataList() {
       return this.hotelInfo.slice(
         (this.pageIndex - 1) * this.pageSize,
@@ -140,6 +140,10 @@ export default {
     setTimeout(() => {
       this.loading = false
     },1000)
+    console.log(this.$store.state.total,678769879)
+  },
+  watch: {
+    // getAllHotelInfo(id)
   },
   methods: {
     // 区域的显示与隐藏
@@ -156,21 +160,22 @@ export default {
     // 封装获取页面数据
     getAllHotelInfo(id) {
       // 获取对应城市酒店信息
-       this.$axios({
+      this.$axios({
         url: `/hotels`,
         params: {
-          city: id
+          city: id,
+          _limit: 22,
+          _start: this.pageIndex
         }
       })
       .then(res => {
         const {data} = res.data
-        console.log(res.data,1234)
         // 设置酒店数据
         this.hotelInfo = data
         // 设置总条数
-        this.total = data.length
+        this.total = res.data.total
+        
       })
-
     },
     // 封装获取景点
     getAllScenics(name) {
@@ -186,15 +191,6 @@ export default {
         this.scenicsLength = res.data.data[0].scenics.length
       })
     },
-    // 实现页面分页
-    setDateList() {
-      // 获取当前页码数
-      var pageIndex = (this.pageIndex - 1) * this.pageSize;
-      // 获取页面条数
-      var pageSize = pageIndex * this.pageSize;
-      // 把分页赋值到显示到显示页面数组中
-      this.dataList = this.hotelInfo.slice(pageIndex,this.pageIndex * this.pageSize)
-    },
     // 切换页面显示条数
     handleSizeChange(val) {
       this.pageSize = val;
@@ -203,6 +199,53 @@ export default {
     // 切换当前页
     handleCurrentChange(val) {
       this.pageIndex = val;
+    },
+    // 筛选价格数据
+    changePrice(value) {
+      this.$axios({
+        url: '/hotels',
+        params: {
+          city: this.$route.query.city,
+          price_lt: value
+        }
+      })
+      .then(res => {
+        const {data} = res.data
+        this.hotelInfo = data
+        this.total = data.length
+      })
+    },
+    // 筛选酒店等级
+    changeLevel(value) {
+      this.$axios({
+        url: '/hotels',
+        params: {
+          city: this.$route.query.city,
+          hotellevel: value
+        }
+      })
+      .then(res => {
+        // console.log(res)
+        const {data} = res.data
+        this.hotelInfo = data
+        this.total = data.length
+      })
+    },
+    // 筛选酒店类型
+    changeType(value) {
+      this.$axios({
+        url: '/hotels',
+        params: {
+          city: this.$route.query.city,
+          hoteltype: value
+        }
+      })
+      .then(res => {
+        // console.log(res)
+        const {data} = res.data
+        this.hotelInfo = data
+        this.total = data.length
+      })
     }
   }
 }

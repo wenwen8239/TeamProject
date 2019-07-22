@@ -122,7 +122,7 @@ import Map2 from '@/components/hotel/map2'
 export default {
   components:{
     HotelComment,
-    Map2   
+    Map2
   },
   data() {
     return {
@@ -148,10 +148,8 @@ export default {
         }
       })
       .then(res => {
-        // console.log(res)
         const { data } = res.data
         this.hotelInfo = data[0]
-        // console.log(this.hotelInfo,123)
       })
     },1)
   }
@@ -210,6 +208,7 @@ export default {
       }
     }
     .price-from {
+      margin-bottom: 40px;
       .title {
         height: 47px;
         line-height: 47px;
@@ -246,7 +245,7 @@ export default {
       border: 1px solid #000;
     }
     .serve {
-      margin-bottom: 40px;
+      margin: 40px 0;
       > .el-row {
         font-size: 14px;
         color: #666;
