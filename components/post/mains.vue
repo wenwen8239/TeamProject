@@ -20,7 +20,7 @@
     <el-row type="flex" justify="space-between" class="mians_gonglie">
       <h4 >推荐攻略</h4>
       <div>
-        <el-button class="el-icon-edit" type="primary"> 写游记</el-button>
+        <el-button class="el-icon-edit" type="primary" @click='create()'> 写游记</el-button>
       </div>
     </el-row>
   </div>
@@ -53,6 +53,9 @@ export default {
   methods: {
     submit(){
       this.$router.push(`/post?city=${this.ValueCity}`)
+    },
+    create(){
+      this.$router.push('/post/create')
     }
   }
 };

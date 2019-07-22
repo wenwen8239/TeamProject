@@ -69,27 +69,7 @@ export default {
   border: 1px solid #ddd;
   border-bottom: none;
   border-right: none;
-  .icons {
-    // color:#ddd;
-    font-size: 20px;
-    margin-left: 135px;
-  }
-  li {
-    height: 40px;
-    font-size: 14px;
-    line-height: 40px;
-    border-bottom: 1px solid #ddd;
-    border-right: 1px solid #ddd;
-    padding: 0 20px;
-    background: #fff;
-    z-index: 5;
-    &:hover {
-      color: orange;
-      border-right: none;
-    }
-  }
-}
-.nei {
+  .nei {
   width: 350px;
   background: #fff;
   position: absolute;
@@ -136,6 +116,27 @@ export default {
     }
   }
 }
+  .icons {
+    // color:#ddd;
+    font-size: 20px;
+    margin-left: 135px;
+  }
+  li {
+    height: 40px;
+    font-size: 14px;
+    line-height: 40px;
+    border-bottom: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    padding: 0 20px;
+    background: #fff;
+    z-index: 5;
+    &:hover {
+      color: orange;
+      border-right: none;
+    }
+  }
+}
+
 .tuijian {
   margin-top: 15px;
   p {

@@ -1,40 +1,51 @@
 <template>
   <div class="sidebar">
     <h3>相关攻略</h3>
-    <nuxt-link to="#" class="pingLun" v-for="(item,index) in comment" :key="index">
-      <div class="pingLun-pl">
-        <el-row>
-          <el-col :span="8" class="imag"><img src="" alt=""></el-col>
-          <el-col :span="16">
-            <el-row class="pingLun-cp">{{item.title}}</el-row>
-            <el-row class="pingLun-time">{{item.time}}</el-row>
-          </el-col>
-        </el-row>
-      </div>
-    </nuxt-link>
+    <div class="monik" v-for="(item,index) in comment" :key="index">
+      <nuxt-link :to="`/post/detail?id=${item.id}`" class="pingLun">
+        <div class="pingLun-pl">
+          <el-row>
+            <el-col :span="8" class="imag">
+              <img src alt />
+            </el-col>
+            <el-col :span="16">
+              <el-row class="pingLun-cp">{{item.title}}</el-row>
+              <el-row class="pingLun-time">{{time}} 阅读 {{item.city}}</el-row>
+            </el-col>
+          </el-row>
+        </div>
+      </nuxt-link>
+    </div>
   </div>
 </template>
 
 <script>
+import moment from "moment";
 import { setTimeout } from "timers";
 export default {
   data() {
     return {
-       //评论
-      comment: [
-      ]
+      //评论
+      time: "",
+      comment: []
     };
   },
-  mounted() {
-    setTimeout(() => {
-      // const { id } = this.$store.state.postDetail.Side;
+  methods: {
+    getXiangQ() {
+      const time = new Date();
+      this.time = moment(time).format("YYYY-MM-DD HH:mm:ss");
       this.$axios({
-        url: "/posts/recommend",
+        url: "/posts/recommend"
       }).then(res => {
-        console.log(res);
         this.comment = res.data.data;
+        if (this.comment.length > 5) {
+          this.comment.length = 5;
+        }
       });
-    }, 200);
+    }
+  },
+  mounted() {
+    this.getXiangQ();
   }
 };
 </script>
@@ -60,23 +71,25 @@ export default {
     overflow: hidden;
     border-bottom: 1px #ccc solid;
     .pingLun-pl {
+      cursor: pointer;
       margin-top: 20px;
       width: 100%;
       height: 80px;
-      background-color: pink;
       .imag {
         height: 80px;
         background-color: #ddd;
-        img{
+        img {
           width: 100%;
           height: 100%;
         }
       }
       .pingLun-cp {
-        height: 60px;
+        height: 67px;
+        padding-left: 5px;
       }
       .pingLun-time {
-        background-color: #999;
+        font-size: 12px;
+        padding-left: 5px;
       }
     }
   }
