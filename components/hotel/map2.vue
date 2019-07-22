@@ -37,10 +37,12 @@ export default {
           // console.log(e.location);
           this.arr.push(e.location); 
         });
-       
+       console.log(this.arr)
       });
-      console.log(this.arr)
-     
+      var markers = this.arr
+      // console.log(markers)
+
+
 
     window.onLoad = function() {
       var map = new AMap.Map("container", {
@@ -49,53 +51,67 @@ export default {
         zoom: 8
       });
 
-      map.clearMap(); // 清除地图覆盖物
+      map.clearMap();// 清除地图覆盖物
+      // var markers 
+      console.log(markers)
+      var icon = [
+        {icon:"//a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-1.png"},
+        {icon:"//a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-2.png"},
+        {icon:"//a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-3.png"},
+        {icon:"//a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-4.png"},
+        {icon:"//a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-5.png"},
+        {icon:"//a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-6.png"},
+        {icon:"//a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-7.png"},
+        {icon:"//a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-8.png"},
+        {icon:"//a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-10.png"},
+        {icon:"//a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-11.png"},
+        {icon:"//a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-12.png"},
+      ]
       
-      // var icon = [
-      //   {icon:"//a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-1.png"},
-      //   {icon:"//a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-2.png"},
-      //   {icon:"//a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-3.png"},
-      //   {icon:"//a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-4.png"},
-      //   {icon:"//a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-5.png"},
-      //   {icon:"//a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-6.png"},
-      //   {icon:"//a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-7.png"},
-      //   {icon:"//a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-8.png"},
-      //   {icon:"//a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-10.png"},
-      //   {icon:"//a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-11.png"},
-      //   {icon:"//a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-12.png"},
-      // ]
-      var bbb = this.arr
-      console.log(this.arr)
       
-      var markers = [
-        {
-          icon:
-            "//a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-1.png",
-          position: [118.8718107, 31.32846821]
-        },
-        {
-          icon:
-            "//a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-2.png",
-          position: [118.787727, 32.057976]
-        },
-        {
-          icon:
-            "//a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-3.png",
-          position: [118.732506, 32.126942]
-        },
-        {
-          icon:
-            "//a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-4.png",
-          position: [118.9213, 31.75649]
-        }
-      ];
+
+
+
+
+      // var markers = [
+      //   {
+      //     icon: "//a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-1.png",
+      //     position:31.32846821,
+      //     longitude:118.8718107
+      //   },
+      //   {
+      //     icon:
+      //       "//a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-2.png",
+      //     position: [118.787727, 32.057976]
+      //   },
+      //   {
+      //     icon:
+      //       "//a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-3.png",
+      //     position: [118.732506, 32.126942]
+      //   },
+      //   {
+      //     icon:
+      //       "//a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-4.png",
+      //     position: [118.9213, 31.75649]
+      //   }
+      // ];
+
+
+      // var markers = [
+      //   { icon:
+      //      "//a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-4.png",
+      //     latitude:31.32846821,
+      //     longitude:118.8718107} 
+      // ]    
 
       // 添加一些分布不均的点到地图上,地图上添加三个点标记，作为参照
+     
       markers.forEach(function(marker) {
         new AMap.Marker({
+          // content:marker.length,
           map: map,
-          icon: marker.icon,
-          position: [marker.position[0], marker.position[1]],
+          // icon: marker.icon,
+          position: [marker.longitude+[0], marker.latitude+[0]],
           offset: new AMap.Pixel(-13, -30)
         });
       });
