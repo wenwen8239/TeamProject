@@ -3,46 +3,54 @@
     <el-container>
       <el-aside width="260px">
         <!-- 左侧导航栏 -->
-        <PostNav/>
+        <PostNav @setCityData='setCityData'/>
       </el-aside>
       <el-main id='you' width="700px">
         <!-- 写游记 -->
-        <Mains/>
+        <Mains :data='miansCityData'/>
         <!-- 内容 -->
-        <Mainx/>
+        <Mainx @setListData='setListData'/>
       </el-main>
     </el-container>
   </div>
 </template>
 
 <script>
-import PostNav from '@/components/post/postnav'
-import Mains from '@/components/post/mains'
-import Mainx from '@/components/post/mainx'
+import PostNav from "@/components/post/postNav.vue";
+import Mains from "@/components/post/mains.vue";
+import Mainx from "@/components/post/mainx.vue";
 export default {
   data() {
     return {
+      mainsListData:[
+
+      ],
+      miansCityData:[]
     };
+  },
+  mounted () {
   },
   components: {
     PostNav,
     Mains,
     Mainx
   },
-  methods: {}
+  methods: {
+    setListData(arr){
+      this.mainsListData = arr
+    },
+    setCityData(arr){
+      this.miansCityData = arr
+    }
+  }
 };
 </script>
 
 <style lang="less" scoped>
-.index {
-  width: 1000px;
-  margin: 0 auto;
-  padding: 20px 0;
-  
-}
-.el-main{
-    padding:0;
-    padding-left: 40px;
+  section{
+    width: 1000px;
+    margin: 0 auto;
+    padding-top: 20px;
   }
 </style>
 

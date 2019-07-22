@@ -87,7 +87,7 @@ export default {
     }).then(res => {
       //标题
       this.parContent = res.data.data[0];
-      this.side = this.parContent.comments
+      this.side = this.parContent
       this.$store.commit("postDetail/setSide",this.side)
       //内容
     });
