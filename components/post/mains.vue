@@ -1,14 +1,21 @@
 <template>
   <div class="mians">
     <el-row type="flex" class="shuru" justify="space-between">
-      <input class="shuchu" type="text" placeholder="请输入想去的地方，比如：'广州'" value />
-      <i class="el-icon-search icon"></i>
+      <input class="shuchu" type="text" placeholder="请输入想去的地方，比如：'广州'" 
+      @keyup.enter="submit"
+       v-model="ValueCity"/>
+      <nuxt-link :to='`/post?city=${this.ValueCity}`' class="el-icon-search icon"></nuxt-link>
     </el-row>
-    <div class="mians_tuijian">
+    <!-- `/post?city=${item2.city}` -->
+    <div class="mians_tuijian" >
       <span>推荐:</span>
-      <nuxt-link to="#">广州</nuxt-link>
-      <nuxt-link to="#">上海</nuxt-link>
-      <nuxt-link to="#">北京</nuxt-link>
+      <nuxt-link 
+      :to="`/post?city=${item.city}`"
+      v-for="(item,index) in mainsCity" 
+      :key="index"
+      >{{item.city}}</nuxt-link>
+      <!-- <nuxt-link to="#">上海</nuxt-link>
+      <nuxt-link to="#">北京</nuxt-link> -->
     </div>
     <el-row type="flex" justify="space-between" class="mians_gonglie">
       <h4 >推荐攻略</h4>
@@ -20,7 +27,35 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data () {
+    return {
+      mainsCity:[
+        {city:"广州"},
+        {city:"成都"},
+        {city:"北京"},
+      ],
+      ValueCity:''
+    }
+  },
+  props: {
+    data:{
+      type:Array,
+      default:[]
+    }
+  },
+  watch: {
+    // 监听路由地址栏数据变化
+    $route(){
+      this.ValueCity = this.$route.query.city
+    }
+  },
+  methods: {
+    submit(){
+      this.$router.push(`/post?city=${this.ValueCity}`)
+    }
+  }
+};
 </script>
 
 <style lang="less" scoped>
