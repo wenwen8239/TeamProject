@@ -16,9 +16,9 @@
 </template>
 
 <script>
-import PostNav from '@/components/post/postnav'
-import Mains from '@/components/post/mains'
-import Mainx from '@/components/post/mainx'
+import DetailsRelated from "@/components/post/detailsRelated.vue";
+import DetailsContent from "@/components/post/detailsContent.vue";
+import DetailsComment from "@/components/post/detailsComment.vue";
 export default {
   data() {
     return {
@@ -50,15 +50,10 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.index {
-  width: 1000px;
-  margin: 0 auto;
-  padding: 20px 0;
-  
-}
-.el-main{
-    padding:0;
-    padding-left: 40px;
+  section{
+    width: 1000px;
+    margin: 0 auto;
+    padding-top: 20px;
   }
 </style>
 
