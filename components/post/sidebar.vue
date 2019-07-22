@@ -1,44 +1,58 @@
 <template>
   <div class="sidebar">
     <h3>相关攻略</h3>
-    <nuxt-link to="#" class="pingLun" v-for="(item,index) in shuJ" :key="index">
-      <div class="pingLun-pl">
-        <el-row>
-          <el-col :span="8" class="imag">{{item.img}}</el-col>
-          <el-col :span="16">
-            <el-row class="pingLun-cp">{{item.tile}}</el-row>
-            <el-row class="pingLun-time">{{item.time}}</el-row>
-          </el-col>
-        </el-row>
-      </div>
-    </nuxt-link>
+    <div class="monik" v-for="(item,index) in comment" :key="index">
+      <nuxt-link :to="`/post/detail?id=${item.id}`" class="pingLun">
+        <div class="pingLun-pl">
+          <el-row>
+            <el-col :span="8" class="imag">
+              <img src alt />
+            </el-col>
+            <el-col :span="16">
+              <el-row class="pingLun-cp">{{item.title}}</el-row>
+              <el-row class="pingLun-time">{{time}} 阅读 {{item.city}}</el-row>
+            </el-col>
+          </el-row>
+        </div>
+      </nuxt-link>
+    </div>
   </div>
 </template>
 
 <script>
+import moment from "moment";
 import { setTimeout } from "timers";
 export default {
   data() {
     return {
-      shuJ: [
-        {img:"123",tile:"简介",time:"时间"},
-        {img:"456",tile:"简介",time:"时间"},
-        {img:"789",tile:"简介",time:"时间"},
-        {img:"901",tile:"简介",time:"时间"}
-      ]
+      //评论
+      time: "",
+      comment: []
     };
   },
+  methods: {
+    getXiangQ() {
+      const time = new Date();
+      this.time = moment(time).format("YYYY-MM-DD HH:mm:ss");
+      this.$axios({
+        url: "/posts/recommend"
+      }).then(res => {
+        this.comment = res.data.data;
+        if (this.comment.length > 5) {
+          this.comment.length = 5;
+        }
+      });
+    }
+  },
   mounted() {
-    // setTimeout(() => {
-    //   this.shuJ = this.$store.state.postDetail.Side;
-    // }, 1);
+    this.getXiangQ();
   }
 };
 </script>
 
 <style lang="less" scoped>
 .sidebar {
-  margin-top:20px;
+  margin-top: 20px;
   position: absolute;
   top: 0;
   right: 0;
@@ -55,22 +69,27 @@ export default {
     display: block;
     height: 121px;
     overflow: hidden;
-    border-bottom:1px #ccc solid;
+    border-bottom: 1px #ccc solid;
     .pingLun-pl {
+      cursor: pointer;
       margin-top: 20px;
       width: 100%;
       height: 80px;
-      background-color: pink;
       .imag {
         height: 80px;
-        background-color: #666;
+        background-color: #ddd;
+        img {
+          width: 100%;
+          height: 100%;
+        }
       }
       .pingLun-cp {
-        height: 60px;
-        background-color: hotpink;
+        height: 67px;
+        padding-left: 5px;
       }
-      .pingLun-time{
-          background-color: #999;
+      .pingLun-time {
+        font-size: 12px;
+        padding-left: 5px;
       }
     }
   }

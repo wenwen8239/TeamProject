@@ -15,16 +15,32 @@
     <div class="shouChang">
       <el-row :gutter="24">
         <el-col :span="3" :push="6">
-          <div class="grid-content bg-purple"><span><i class="el-icon-edit"></i>评论(100)</span></div>
+          <div class="grid-content bg-purple">
+            <span>
+              <i class="el-icon-edit"></i>评论(100)
+            </span>
+          </div>
         </el-col>
         <el-col :span="3" :push="6">
-          <div class="grid-content bg-purple"><span @click="collect"><i :class="icon"></i>收藏</span></div>
+          <div class="grid-content bg-purple">
+            <span @click="collect">
+              <i :class="icon"></i>收藏
+            </span>
+          </div>
         </el-col>
         <el-col :span="3" :push="6">
-          <div class="grid-content bg-purple"><span><i class="el-icon-share"></i>分享</span></div>
+          <div class="grid-content bg-purple">
+            <span>
+              <i class="el-icon-share"></i>分享
+            </span>
+          </div>
         </el-col>
         <el-col :span="3" :push="6">
-          <div class="grid-content bg-purple"><span @click="getZan"><i class="el-icon-check"></i>点赞(30)</span></div>
+          <div class="grid-content bg-purple">
+            <span @click="getZan">
+              <i class="el-icon-check"></i>点赞(30)
+            </span>
+          </div>
         </el-col>
       </el-row>
     </div>
@@ -32,70 +48,81 @@
 </template>
     
 <script>
-import { setTimeout } from 'timers';
+import { setTimeout } from "timers";
 export default {
   data() {
     return {
       //id
-      userId:{},
-      icon:"el-icon-star-off",
-      token:"",
+      userId: {},
+      icon: "el-icon-star-off",
+      token: "",
       id: 4,
       gl: {},
       parContent: {},
-      side:[]
+      side: []
     };
   },
-  methods:{
-    collect(){
+  methods: {
+    // 文章数据
+    getWenZ() {
+      this.id = this.$route.query.id;
       this.$axios({
-        url:"/posts/star",
-        params:{
-          id:this.parContent.id
-        },
-        headers:{
-          Authorization: `Bearer ${this.token}`
+        url: "/posts",
+        params: {
+          id: this.id
         }
-      }).then(res =>{
-        if(res.data.status === 0){
-          this.$message.success('收藏成功')
-        }
-      })
+      }).then(res => {
+        //标题
+        this.parContent = res.data.data[0];
+        this.side = this.parContent;
+        this.$store.commit("postDetail/setSide", this.side);
+        //内容
+      });
+      this.token = this.$store.state.user.userInfo.token;
+      const {
+        user: { id }
+      } = this.$store.state.user.userInfo;
+      this.userId = id;
     },
-    getZan(){
+    collect() {
       this.$axios({
-        url:"/posts/like",
-        params:{
-          id:this.parContent.id
+        url: "/posts/star",
+        params: {
+          id: this.parContent.id
         },
-        headers:{
+        headers: {
           Authorization: `Bearer ${this.token}`
         }
-      }).then(res =>{
-        if(res.data.status === 0){
-          this.$message.success('点赞成功')
+      }).then(res => {
+        if (res.data.status === 0) {
+          this.$message.success("收藏成功");
         }
-      })
+      });
+    },
+    getZan() {
+      this.$axios({
+        url: "/posts/like",
+        params: {
+          id: this.parContent.id
+        },
+        headers: {
+          Authorization: `Bearer ${this.token}`
+        }
+      }).then(res => {
+        if (res.data.status === 0) {
+          this.$message.success("点赞成功");
+        }
+      });
+    }
+  },
+
+  watch: {
+    $route() {
+      this.getWenZ()
     }
   },
   mounted() {
-    this.$axios({
-      url: "/posts",
-      params: {
-        id: this.id
-      }
-    }).then(res => {
-      //标题
-      this.parContent = res.data.data[0];
-      this.side = this.parContent.comments
-      this.$store.commit("postDetail/setSide",this.side)
-      //内容
-    });
-    setTimeout(() =>{
-      this.token = this.$store.state.user.userInfo.token
-      const {user:{id}} = this.$store.state.user.userInfo
-      this.userId = id
-    },200)
+    this.getWenZ()
   }
 };
 </script>
@@ -132,7 +159,7 @@ export default {
   }
   .part-content {
     width: 100%;
-    margin-bottom:35px;
+    margin-bottom: 35px;
     /deep/ img {
       max-width: 700px !important;
     }
@@ -142,14 +169,14 @@ export default {
     height: 80px;
     text-align: center;
     span {
-      cursor:pointer;
+      cursor: pointer;
       display: block;
       width: 60px;
       height: 60px;
       font-size: 12px;
     }
     /deep/i {
-        color:orange;
+      color: orange;
       font-size: 30px;
       margin: 0 10px;
     }

@@ -1,30 +1,43 @@
-<template></template>
+<template>
+<!-- 测试2 -->
+  <div id="container"></div>
+
+</template>
 
 <script>
 export default {
   data() {
     return {
-      houstList: []
+      houstList:[]
     };
   },
+  methods:{
+    
+  },
   mounted() {
+    
     this.$axios({
-      url: "http://157.122.54.189:9095/hotels",
-      params: { city: this.$route.query.city }
+      url: "/hotels?city=74",
+      // params: { city: this.$route.query.city }
     }).then(res => {
       this.houstList = res.data.data;
+      console.log(this.houstList)
     });
     const _this = this;
-    // 地图
+      
+
+
+
     window.onLoad = function() {
       // 等待页面加载完成之后才执行
       // container是页面的div容器
       var map = new AMap.Map("container", {
         zoom: 11, //级别
-        center: [118.78, 32.07], //中心点坐标
+        // center: [118.78, 32.07], //中心点坐标
         viewMode: "3D" //使用3D视图
       });
-
+      
+     
       // 创建一个 Marker 实例：
       console.log(_this.houstList);
       const arr = [];
@@ -47,7 +60,8 @@ export default {
           })
         );
       });
-      var newCenter = map.setFitView();
+      map.add(arr)
+      map.setFitView();
     };
     var key = "06a826ee0fb07dd1d415017681ce0238";
     var url = `https://webapi.amap.com/maps?v=1.4.15&key=${key}&callback=onLoad`;
@@ -59,5 +73,10 @@ export default {
 };
 </script>
 
-<style>
+<style lang="less" scoped>
+#container {
+  margin-left: 20px;
+  width: 400px;
+  height: 250px;
+}
 </style>

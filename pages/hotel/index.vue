@@ -2,7 +2,7 @@
     <!-- 酒店首页 -->
     <div class="container">
       <!-- 头部搜索组件 -->
-      <HotelSearch @getAllHotelInfo="getAllHotelInfo"/>
+      <HotelSearch @getAllHotelInfo="getAllHotelInfo" @getAllScenics="getAllScenics"/>
       <!-- 酒店介绍模块 -->
       <div class="hotel-option">
         <el-row type="flex">
@@ -19,7 +19,7 @@
                 </div>
                 <nuxt-link to="#" class="moreAera" :class={rotate:isrotate} @click.native="changeShow">
                   <i class="el-icon-d-arrow-right"></i>
-                  <span>等43个区域</span>
+                  <span>等{{scenicsLength}}个区域</span>
                 </nuxt-link>
               </el-col>
             </el-row>
@@ -66,7 +66,7 @@
           </el-col>
           <el-col :span="10">
               <!-- Map -->
-              <Map />
+              <Map1 />
 
           </el-col>
         </el-row>
@@ -92,11 +92,13 @@
 import HotelSearch from '@/components/hotel/hotelSearch'
 import HotelListFilter from '@/components/hotel/hotelListFilter'
 import HotelList from '@/components/hotel/hotelList'
+import Map1 from '@/components/hotel/map1'
 export default {
   components: {
     HotelSearch,
     HotelListFilter,
-    HotelList
+    HotelList,
+    Map1
   },
   data() {
     return {
@@ -110,10 +112,12 @@ export default {
       // 当前页码
       pageIndex: 1,
       // 页面显示条数
-      pageSize: 2,
+      pageSize: 4,
       loading: true,
       // 景区
-      scenics: []
+      scenics: [],
+      // 景区总个数
+      scenicsLength: 0
     }
   },
   computed: {
@@ -130,7 +134,8 @@ export default {
     this.$router.push('/hotel?city=199')
     setTimeout(() => {
       var id = parseInt(this.$route.query.city);
-      this.getAllHotelInfo(id,'南京')
+      this.getAllHotelInfo(id)
+      this.getAllScenics('深圳')
     },1)
     setTimeout(() => {
       this.loading = false
@@ -149,19 +154,26 @@ export default {
       }
     },
     // 封装获取页面数据
-    getAllHotelInfo(id,name) {
+    getAllHotelInfo(id) {
       // 获取对应城市酒店信息
        this.$axios({
         url: `/hotels`,
-        query: this.$route.query
+        params: {
+          city: id
+        }
       })
       .then(res => {
         const {data} = res.data
+        console.log(res.data,1234)
         // 设置酒店数据
         this.hotelInfo = data
         // 设置总条数
         this.total = data.length
       })
+
+    },
+    // 封装获取景点
+    getAllScenics(name) {
       // 获取城市景点
       this.$axios({
         url: '/cities',
@@ -171,6 +183,7 @@ export default {
       })
       .then(res => {
         this.scenics = res.data.data[0].scenics
+        this.scenicsLength = res.data.data[0].scenics.length
       })
     },
     // 实现页面分页

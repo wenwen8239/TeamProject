@@ -9,7 +9,7 @@
           <span style="float:right;">0-4000</span>
         </div>
         <!-- 滑块 -->
-        <el-slider v-model="priceRange" :format-tooltip="formatTooltip"></el-slider>
+        <el-slider v-model="priceRange" :format-tooltip="formatTooltip" @change="handleChangePrice"></el-slider>
       </el-col>
       <!-- 住宿等级 -->
       <el-col :span="5">
@@ -83,6 +83,10 @@ export default {
   methods: {
     formatTooltip(val) {
       return val * 40;
+    },
+    // 拖动滑块更改价格
+    handleChangePrice(value) {
+      console.log(value)
     }
   },
   mounted () {
@@ -114,7 +118,6 @@ export default {
       }
       /deep/ .el-input__inner {
         border: none;
-        // border: 1px solid #000;
       }
     }
 
