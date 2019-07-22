@@ -24,15 +24,30 @@
       </div>
     </div>
     <!-- 评论部分 -->
-    <item/>
+    <myItem :data="comment"/>
+    <!-- 分页 -->
+    <el-pagination
+      @size-change="handleSizeChange"
+      @current-change="handleCurrentChange"
+      :current-page="currentPage4"
+      :page-sizes="[100, 200, 300, 400]"
+      :page-size="100"
+      layout="total, sizes, prev, pager, next, jumper"
+      :total="400"
+      class="fenYe"
+    ></el-pagination>
   </div>
 </template>
 
 <script>
-import item from "@/components/post/item.vue"
+import myItem from "@/components/post/item.vue";
 export default {
   data() {
     return {
+      currentPage4: 4,
+      // 文章id
+      articleId: "",
+      comment: [],
       loading: false,
       //文章id
       dialogImageUrl: "",
@@ -40,10 +55,18 @@ export default {
       textarea: ""
     };
   },
-  components:{
-    item
+  components: {
+    myItem
   },
   methods: {
+    //分页
+    handleSizeChange(val) {
+      console.log(`每页 ${val} 条`);
+    },
+    handleCurrentChange(val) {
+      console.log(`当前页: ${val}`);
+    },
+    //上传图片
     handleRemove(file, fileList) {
       console.log(file, fileList, "sdas");
     },
@@ -51,7 +74,28 @@ export default {
       console.log(file);
       //   this.dialogImageUrl = file.url;
       //   this.dialogVisible = true;
+    },
+    // 获取评论
+    getTree() {
+      this.$axios({
+        url: "/posts/comments",
+        params: {
+          post: this.articleId
+        }
+      }).then(res => {
+        this.comment = res.data.data;
+      });
     }
+  },
+  watch: {
+    $route() {
+      this.articleId = this.$route.query.id;
+      this.getTree();
+    }
+  },
+  mounted() {
+    this.articleId = this.$route.query.id;
+    this.getTree();
   }
 };
 </script>
