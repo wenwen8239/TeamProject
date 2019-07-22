@@ -3,13 +3,13 @@
     <el-container>
       <el-aside width="260px">
         <!-- 左侧导航栏 -->
-        <PostNav/>
+        <PostNav @setCityData='setCityData'/>
       </el-aside>
       <el-main id='you' width="700px">
         <!-- 写游记 -->
-        <Mains/>
+        <Mains :data='miansCityData'/>
         <!-- 内容 -->
-        <Mainx/>
+        <Mainx @setListData='setListData'/>
       </el-main>
     </el-container>
   </div>
@@ -22,14 +22,30 @@ import Mainx from '@/components/post/mainx'
 export default {
   data() {
     return {
+      mainsListData:[
+
+      ],
+      miansCityData:[]
     };
+  },
+  mounted () {
+    console.log(this.$store.state.user.userInfo.user.defaultAvatar,123);
+    
+    
   },
   components: {
     PostNav,
     Mains,
     Mainx
   },
-  methods: {}
+  methods: {
+    setListData(arr){
+      this.mainsListData = arr
+    },
+    setCityData(arr){
+      this.miansCityData = arr
+    }
+  }
 };
 </script>
 
