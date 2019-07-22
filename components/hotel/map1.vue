@@ -76,7 +76,7 @@ export default {
 <style lang="less" scoped>
 #container {
   margin-left: 20px;
-  width: 420px;
-  height: 360px;
+  width: 400px;
+  height: 250px;
 }
 </style>
