@@ -9,44 +9,52 @@
     <div class="updatabtn">
       <div class="updata">
         <el-upload
-          action="https://jsonplaceholder.typicode.com/posts/"
+          action="http://127.0.0.1:1337/upload"
           list-type="picture-card"
           :on-preview="handlePictureCardPreview"
           :on-remove="handleRemove"
+          name="files"
         >
           <i class="el-icon-plus"></i>
         </el-upload>
         <el-dialog :visible.sync="dialogVisible" size="tiny">
-          <img width="100%" :src="dialogImageUrl" alt />
+          <img :src="dialogImageUrl" alt />
         </el-dialog>
         <el-button type="primary" class="upbtn">主要按钮</el-button>
       </div>
     </div>
+    <!-- 评论部分 -->
+    <item/>
   </div>
 </template>
 
 <script>
+import item from "@/components/post/item.vue"
 export default {
   data() {
     return {
+      loading: false,
+      //文章id
       dialogImageUrl: "",
       dialogVisible: false,
       textarea: ""
     };
   },
+  components:{
+    item
+  },
   methods: {
     handleRemove(file, fileList) {
-      console.log(file, fileList);
+      console.log(file, fileList, "sdas");
     },
     handlePictureCardPreview(file) {
-        console.log(file)
-    //   this.dialogImageUrl = file.url;
-    //   this.dialogVisible = true;
+      console.log(file);
+      //   this.dialogImageUrl = file.url;
+      //   this.dialogVisible = true;
     }
   }
 };
 </script>
-
 <style lang="less" scoped>
 .comt {
   width: 70%;
@@ -79,11 +87,27 @@ export default {
   //   上传图片
   .updatabtn {
     position: relative;
+    margin-bottom: 30px;
+    /deep/.el-upload {
+      width: 100px;
+      height: 100px;
+      position: relative;
+      /deep/i {
+        position: absolute;
+        top: 35px;
+        left: 35px;
+      }
+    }
     .upbtn {
       position: absolute;
       top: 0;
       right: 0;
     }
+  }
+  // 评论
+  .pingLun {
+    width: 100%;
+    border: 1px #666 solid;
   }
 }
 </style>
