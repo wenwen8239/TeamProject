@@ -1,14 +1,14 @@
 <template>
   <div class="mainx">
-    <div 
+    <div
     class="mainx_nei mains"
-    v-for="(item,index) in listData" 
+    v-for="(item,index) in listData"
     :key="index"
     >
-      <nuxt-link to="#" class="biao_tou">{{item.title}}</nuxt-link>
+      <nuxt-link to="/post/detail" class="biao_tou">{{item.title}}</nuxt-link>
       <p>{{item.summary}}</p>
       <el-row type="flex" class="row-bg" justify="space-between">
-        <nuxt-link 
+        <nuxt-link
         to="#"
         v-for="(item2,index2) in item.images"
         :key="index2"

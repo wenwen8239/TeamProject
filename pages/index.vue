@@ -53,6 +53,21 @@ export default {
       this.banners = data
     })
   },
+  watch: {
+    search(value) {
+      this.$axios({
+        url: '/cities',
+        params: {
+          name: value
+        }
+      })
+      .then(res => {
+        const cityId = res.data.data[0].id;
+        // console.log(cityId)
+        // this.$store.commit('setCityId',cityId);
+      })
+    }
+  },
   methods: {
     // 实现点击机票跳转页面
     handleClick(index) {

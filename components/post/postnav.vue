@@ -91,7 +91,7 @@ export default {
   background: #fff;
   position: absolute;
   top: 81px;
-  left: 520px;
+  left: 277px;
   border: 1px solid #ddd;
   border-left: none;
   z-index: 4;

@@ -11,7 +11,7 @@
       <!-- 中间酒店信息 -->
       <el-col :span="10" class="hotel-intro">
         <!-- 标题 -->
-        <nuxt-link :to="{ path: `/hotel/details?${data.id}` }"><h2>{{data.name}}</h2></nuxt-link>
+        <nuxt-link :to="{ path: `/hotel/details?id=${data.id}` }"><h2>{{data.name}}</h2></nuxt-link>
         <!-- 酒店英文名 -->
         <div class="hotel-en-name">
           <span>{{data.alias}}</span>
@@ -63,6 +63,7 @@
         </nuxt-link>
       </el-col>
     </el-row>
+    <el-row v-if="data.length === 0">暂时没有这个地区的酒店数据</el-row>
   </div>
 </template>
 
@@ -88,6 +89,15 @@ export default {
 </script>
 
 <style lang="less" scoped>
+  .textTopRight {
+    > a {
+      margin-right: 15px;
+    }
+    span {
+      background-color: #eee;
+    }
+  }
+
   .hotel-list {
     > .el-row {
       padding: 25px 0;
