@@ -13,8 +13,8 @@
               <span>{{item.type}}</span>
               <i class="el-icon-arrow-right icons"></i>
             </div>
-            <div class="nei" v-show="connst === index">
-              <nuxt-link v-for="(item2,index2) in item.children" :key="index2" to="#">
+            <div class="nei" v-show="connst===index">
+              <nuxt-link v-for="(item2,index2) in item.children" :key="index2" :to="`/post?city=${item2.city}`">
                 <i>{{index2+1}}</i>
                 <strong>{{item2.city}}</strong>
                 <span>{{item2.desc}}</span>
@@ -46,9 +46,10 @@ export default {
     this.$axios({
       url: "/posts/cities"
     }).then(res => {
-      // console.log(res);
+      // console.log(res.data.data,123);
       if (res.status == 200) {
         this.CityData = res.data.data;
+        this.$emit( "setCityData", this.CityData );
       }
     });
   },
@@ -69,7 +70,9 @@ export default {
   border-bottom: none;
   border-right: none;
   .icons {
-    margin-left: 140px;
+    // color:#ddd;
+    font-size: 20px;
+    margin-left: 135px;
   }
   li {
     height: 40px;
@@ -103,24 +106,33 @@ export default {
     left: 0;
   }
   a {
+    // vertical-align: middle;
     display: block;
     height: 40px;
     line-height: 40px;
     i {
-      margin: 0 10px;
+      font-style: oblique;
+      margin-left: 20px;
+      margin-right: 5px;
       color: orange;
-      font-size: 20px;
+      font-size: 24px;
     }
     strong {
-      margin: 0 10px;
+      margin: 0 5px;
       color: orange;
-      // font-size: 20px;
+      font-weight: 400;
+      &:hover {
+        text-decoration: underline;
+      }
     }
     span {
       color: #999;
-      // vertical-align: middle;
       font-size: 14px;
-      margin: 0 10px;
+      margin: 0 5px;
+      font-weight: 400;
+      &:hover {
+        text-decoration: underline;
+      }
     }
   }
 }
