@@ -16,9 +16,9 @@
 </template>
 
 <script>
-import PostNav from "@/components/post/postnav.vue";
-import DetailsContent from "@/components/post/detailsContent.vue";
-import DetailsComment from "@/components/post/detailsComment.vue";
+import PostNav from "@/components/post/postNav.vue";
+import Mains from "@/components/post/mains.vue";
+import Mainx from "@/components/post/mainx.vue";
 export default {
   data() {
     return {
@@ -29,9 +29,6 @@ export default {
     };
   },
   mounted () {
-    console.log(this.$store.state.user.userInfo.user.defaultAvatar,123);
-    
-    
   },
   components: {
     PostNav,
