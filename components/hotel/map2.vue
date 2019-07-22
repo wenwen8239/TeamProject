@@ -1,128 +1,99 @@
 <template>
-<!-- 测试2 -->
-  <div id="container"></div>
-
+<!-- 测试1 -->
+  
+    <el-row type="flex"> 
+      <el-col :span="16"><div id="container"></div></el-col>
+      <el-col :span="8"><BusMarker /></el-col>
+    </el-row> 
+ 
+   
+  
 </template>
 
 <script>
-
+import BusMarker from '@/components/hotel/busMarker'
 export default {
+  components:{
+    BusMarker
+  },
   data() {
     return {
+      mapdata: [],
       arr:[]
     };
   },
   methods:{
-    // getmaps(){
-    //    this.$axios({
-    //     url: "/hotels?city=74"
-    //   }).then(res => {
-    //     // console.log(res.data.data);
-    //     const { data } = res.data;     
-    //     data.forEach(e => {
-    //       // console.log(e.location);
-    //       this.arr.push(e.location);
-    //     });
-    //   });
-    // }
-  },
-  mounted() {
-    
-    this.$axios({
+    getmaps(){
+       this.$axios({
         url: "/hotels?city=74"
       }).then(res => {
-        // console.log(res.data.data);
-        const { data } = res.data;     
+        console.log(res.data.data);
+        const { data } = res.data;
+        // var arr = [];
         data.forEach(e => {
-          // console.log(e.location);
-          this.arr.push(e.location); 
+          console.log(e.location);
+          this.arr.push(e.location);
         });
-       console.log(this.arr)
+        // return arr
+        
       });
-      var markers = this.arr
-      // console.log(markers)
-
-
-
+    }
+  },
+  mounted() {
+    // setTimeout(()=>{
+        
+    // },500)
+    this.getmaps()
+    console.log(this.arr, 'ftdhthssss')
     window.onLoad = function() {
       var map = new AMap.Map("container", {
-        resizeEnable: true,
-        center: [118.9213, 31.75649],
-        zoom: 8
+        zoom: 11, //级别
+        center: [118.8718107, 31.32846821], //中心点坐标
+        viewMode: "3D" //使用3D视图
+      });
+      
+      for (var i = 0; i < this.arr.length; i++) {
+          var long = [this.arr[i].longitude, this.arr[i].latitude];
+         return marker = new AMap.Marker({
+            position: long,
+            zIndex: 101,
+            // map: map
+          });
+        }
+       
+    //  var  setMark = this.arr.for(ele => {
+    //    var long = [ele.longitude, ele.latitude];
+    //    marker = new AMap.Marker({
+    //         position: long,
+    //         zIndex: 101,
+    //         map: map
+    //       });
+    //  })
+      //  marker.setMap(map);
+      // 创建一个 Marker 实例：
+      var marker1 = new AMap.Marker({
+        content: `<div>1</div>`,
+        position: new AMap.LngLat(118.8718107, 31.32846821), // 经纬度对象，也可以是经纬度构成的一维数组[116.39, 39.9]
+        title: "南京"
       });
 
-      map.clearMap();// 清除地图覆盖物
-      // var markers 
-      console.log(markers)
-      var icon = [
-        {icon:"//a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-1.png"},
-        {icon:"//a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-2.png"},
-        {icon:"//a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-3.png"},
-        {icon:"//a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-4.png"},
-        {icon:"//a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-5.png"},
-        {icon:"//a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-6.png"},
-        {icon:"//a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-7.png"},
-        {icon:"//a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-8.png"},
-        {icon:"//a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-10.png"},
-        {icon:"//a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-11.png"},
-        {icon:"//a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-12.png"},
-      ]
-      
-      
-
-
-
-
-      // var markers = [
-      //   {
-      //     icon: "//a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-1.png",
-      //     position:31.32846821,
-      //     longitude:118.8718107
-      //   },
-      //   {
-      //     icon:
-      //       "//a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-2.png",
-      //     position: [118.787727, 32.057976]
-      //   },
-      //   {
-      //     icon:
-      //       "//a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-3.png",
-      //     position: [118.732506, 32.126942]
-      //   },
-      //   {
-      //     icon:
-      //       "//a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-4.png",
-      //     position: [118.9213, 31.75649]
-      //   }
-      // ];
-
-
-      // var markers = [
-      //   { icon:
-      //      "//a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-4.png",
-      //     latitude:31.32846821,
-      //     longitude:118.8718107} 
-      // ]    
-
-      // 添加一些分布不均的点到地图上,地图上添加三个点标记，作为参照
-     
-      markers.forEach(function(marker) {
-        new AMap.Marker({
-          // content:marker.length,
-          map: map,
-          // icon: marker.icon,
-          position: [marker.longitude+[0], marker.latitude+[0]],
-          offset: new AMap.Pixel(-13, -30)
-        });
+      var marker2 = new AMap.Marker({
+        content: `<div>2</div>`,
+        position: new AMap.LngLat(118.8818107, 31.33846821), // 经纬度对象，也可以是经纬度构成的一维数组[116.39, 39.9]
+        title: "南京"
       });
+
+      var markerList = [marker1, marker2];
+      // 将创建的点标记添加到已有的地图实例：
+      map.add(marker);
     };
+
     var key = "06a826ee0fb07dd1d415017681ce0238";
     var url = `https://webapi.amap.com/maps?v=1.4.15&key=${key}&callback=onLoad`;
     var jsapi = document.createElement("script");
     jsapi.charset = "utf-8";
     jsapi.src = url;
     document.head.appendChild(jsapi);
-
   }
 };
 </script>
@@ -130,12 +101,19 @@ export default {
 <style lang="less" scoped>
 #container {
   margin-left: 20px;
-  width: 420px;
-  height: 360px;
+  // width: 520px;
+  height: 460px;
 }
-/deep/.amap-icon{
-  img{
-    width: 20px;
-  }
+/deep/.amap-marker-content {
+  display: inline-block;
+  width: 18px;
+  height: 30px;
+  background: url(https://webapi.amap.com/theme/v1.3/markers/b/mark_b.png)
+    no-repeat center;
+  background-size: 18px 30px;
+  text-align: center;
+  line-height: 20px;
+  color: #fff;
+  font-size: 12px;
 }
 </style>

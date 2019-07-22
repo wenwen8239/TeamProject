@@ -74,8 +74,8 @@
         </el-row>
       </div>
     </div>
-    <!-- 地图 -->
-    <div class="map"></div>
+    <!-- Map -->
+    <Map2 />
     <!-- 服务 -->
     <div class="serve">
       <!-- 基本信息 -->
@@ -113,9 +113,11 @@
 
 <script>
 import HotelComment from '@/components/hotel/hotelComment'
+import Map2 from '@/components/hotel/map2'
 export default {
   components:{
-    HotelComment
+    HotelComment,
+    Map2   
   },
   data() {
     return {

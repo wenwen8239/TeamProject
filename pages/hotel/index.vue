@@ -66,7 +66,7 @@
           </el-col>
           <el-col :span="10">
               <!-- Map -->
-              <Map />
+              <Map1 />
 
           </el-col>
         </el-row>
@@ -92,11 +92,13 @@
 import HotelSearch from '@/components/hotel/hotelSearch'
 import HotelListFilter from '@/components/hotel/hotelListFilter'
 import HotelList from '@/components/hotel/hotelList'
+import Map1 from '@/components/hotel/map1'
 export default {
   components: {
     HotelSearch,
     HotelListFilter,
-    HotelList
+    HotelList,
+    Map1
   },
   data() {
     return {
