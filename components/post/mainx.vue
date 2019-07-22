@@ -84,7 +84,7 @@ export default {
       pageData:[],
       pageIndex:1,
       pageSize:4,
-    
+
     };
   },
 
@@ -98,7 +98,7 @@ export default {
         }
       }).then(res => {
         console.log(res.data.data);
-        
+
         if (res.status == 200) {
           var arr = res.data.data;
 
