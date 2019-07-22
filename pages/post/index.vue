@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import DetailsRelated from "@/components/post/detailsRelated.vue";
+import PostNav from "@/components/post/postnav.vue";
 import DetailsContent from "@/components/post/detailsContent.vue";
 import DetailsComment from "@/components/post/detailsComment.vue";
 export default {

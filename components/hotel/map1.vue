@@ -33,7 +33,7 @@ export default {
       // container是页面的div容器
       var map = new AMap.Map("container", {
         zoom: 11, //级别
-        center: [118.78, 32.07], //中心点坐标
+        // center: [118.78, 32.07], //中心点坐标
         viewMode: "3D" //使用3D视图
       });
       
@@ -60,7 +60,8 @@ export default {
           })
         );
       });
-      // var newCenter = map.setFitView();
+      map.add(arr)
+      map.setFitView();
     };
     var key = "06a826ee0fb07dd1d415017681ce0238";
     var url = `https://webapi.amap.com/maps?v=1.4.15&key=${key}&callback=onLoad`;
