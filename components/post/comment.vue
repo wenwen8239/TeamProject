@@ -3,7 +3,7 @@
     <!-- 文本域部分 -->
     <h3>评论</h3>
     <div class="tera">
-      <textarea style="resize:none;" placeholder="说点什么吧"></textarea>
+      <textarea style="resize:none;" placeholder="说点什么吧" v-model="addform.content"></textarea>
     </div>
     <!-- 上传图片部分 -->
     <div class="updatabtn">
@@ -14,17 +14,20 @@
           :on-preview="handlePictureCardPreview"
           :on-remove="handleRemove"
           name="files"
+          :on-success="handUp"
         >
           <i class="el-icon-plus"></i>
         </el-upload>
         <el-dialog :visible.sync="dialogVisible" size="tiny">
           <img :src="dialogImageUrl" alt />
         </el-dialog>
-        <el-button type="primary" class="upbtn">主要按钮</el-button>
+        <el-button type="primary" class="upbtn" @click="upTijiao">提交</el-button>
       </div>
     </div>
     <!-- 评论部分 -->
-    <myItem :data="comment"/>
+    <div class="yangS">
+      <myItem class="imt" v-for="(item,index) in comment" :key="index" :data="item" />
+    </div>
     <!-- 分页 -->
     <el-pagination
       @size-change="handleSizeChange"
@@ -41,9 +44,11 @@
 
 <script>
 import myItem from "@/components/post/item.vue";
+import { setTimeout } from 'timers';
 export default {
   data() {
     return {
+      token:"",
       currentPage4: 4,
       // 文章id
       articleId: "",
@@ -52,7 +57,14 @@ export default {
       //文章id
       dialogImageUrl: "",
       dialogVisible: false,
-      textarea: ""
+	  tarea: "",
+	  //评论数据
+      addform:{
+        content:"", //评论内容
+		pics:[],//图片
+		post:"",//文章id
+		follow:""//回复id
+      },
     };
   },
   components: {
@@ -60,6 +72,9 @@ export default {
   },
   methods: {
     //分页
+    handUp(response, file, fileList){
+      console.log(response)
+    },
     handleSizeChange(val) {
       console.log(`每页 ${val} 条`);
     },
@@ -74,6 +89,21 @@ export default {
       console.log(file);
       //   this.dialogImageUrl = file.url;
       //   this.dialogVisible = true;
+    },
+    //提交评论
+    upTijiao() {
+		this.addform.post = this.articleId
+      this.$axios({
+        url: "/comments",
+        method: "post",
+        data: this.addform,
+        headers: {
+          Authorization: `Bearer ${this.token}`
+        }
+      }).then(res => {
+		this.getTree()
+		this.addform = {}
+      });
     },
     // 获取评论
     getTree() {
@@ -96,6 +126,9 @@ export default {
   mounted() {
     this.articleId = this.$route.query.id;
     this.getTree();
+    setTimeout(() =>{
+      this.token = this.$store.state.user.userInfo.token
+    },200)
   }
 };
 </script>
@@ -149,9 +182,14 @@ export default {
     }
   }
   // 评论
-  .pingLun {
+  .yangS {
     width: 100%;
-    border: 1px #666 solid;
+    border: 1px #999 solid;
+    .imt {
+      border-bottom: 1px #666 dashed;
+      padding: 20px 20px 5px;
+      box-sizing: border-box;
+    }
   }
 }
 </style>

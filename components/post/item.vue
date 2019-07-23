@@ -1,48 +1,51 @@
 <template>
   <div class="artc">
-    <!-- <div class="pingL">
+    <div class="meg">
       <div class="user">
-        <div class="userid">
-          <img src alt />
-          <span>昵称</span>
-          <span>time</span>
-          <i>1</i>
-        </div>
-        <div class="user-content">
-          <span>内容</span>
-        </div>
-        <div class="user-img">
-          <img src alt />
-        </div>
+        <i>
+          <img :src="$axios.defaults.baseURL+data.account.defaultAvatar" alt />
+        </i>
+        <span class="userName">{{data.account.nickname}}</span>
+        <span class="usertime">time</span>
+        <span class="shunX">{{data.level}}</span>
       </div>
-    </div>-->
-    <ul>
-      <li v-for="(item,index) in data" :key="index">
-        <p>{{item.content}}</p>
-        <!-- <item :data="item"></item> -->
+      <div class="content">
+        <div class="Digu">
+          <Item v-if="data.parent!==undefined" :data="data.parent"></Item>
+        </div>
+        <div class="pingl">{{data.content}}</div>
+      </div>
+      <!-- <ul>
+      <li class="content">
+        <img :src="$axios.defaults.baseURL +data.account.defaultAvatar" alt />
+        <span class="name">{{data.account.nickname}}</span>
+        <span class="time">time</span>
+        <p>{{data.content}}</p>
+        <Item v-if="data.parent!==undefined" :data="data.parent"></Item>
       </li>
-    </ul>
+      </ul>-->
+    </div>
   </div>
 </template>
 
 <script>
-import { setTimeout } from "timers";
 export default {
   data() {
     return {};
   },
-  name: "item",
+  name: "Item",
   props: {
     data: {
-      type: Array,
-      default: []
+      type: Object,
+      default: {
+        parent: {
+          account: {}
+        }
+      }
     }
   },
   methods: {},
   mounted() {
-    setTimeout(() => {
-      console.log(this.data);
-    }, 200);
   }
 };
 </script>
@@ -50,60 +53,31 @@ export default {
 <style lang="less" scoped>
 // 评论
 .artc {
-  ul {
-    padding-left: 20px !important;
-  }
   width: 100%;
-  .pingL {
-    width: 100%;
-    border: 1px #666 solid;
-    margin-bottom: 15px;
+  .meg {
+      // border:1px #999 solid;
     .user {
-      border-bottom: 1px #ccc dashed;
-      padding: 20px 20px 5px;
-    }
-    .userid {
-      height: 24px;
-      line-height: 24px;
-      margin-bottom: 5px;
-      img {
-        vertical-align: middle;
-        width: 20px;
-        height: 20px;
-        padding-bottom: 3px;
-      }
-      span {
-        &:nth-child(2) {
-          font-size: 12px;
-          color: #666;
-        }
-        &:nth-child(3) {
-          font-size: 12px;
-          color: #999;
-        }
-      }
       i {
-        font-weight: normal;
+        img {
+          width: 15px;
+          height: 15px;
+        }
+      }
+      .userName {
         font-size: 12px;
+        color: #666;
+      }
+      .usertime {
+        font-size: 12px;
+        color: #999;
+      }
+      .shunX{
         float: right;
       }
     }
-    .user-content {
-      text-indent: 2em;
-      font-size: 14px;
-      margin-bottom: 15px;
+    .content {
+      padding: 0 15px 0 15px;
     }
-    .user-img {
-      width: 100px;
-      height: 100px;
-      border: 1px #ccc dashed;
-      border-radius: 10px;
-      padding: 5px;
-      box-sizing: border-box;
-    }
-  }
-  .fenYe {
-    text-align: center;
   }
 }
 </style>
