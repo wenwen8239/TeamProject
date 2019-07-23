@@ -1,20 +1,15 @@
 // 存数据
 // 酒店信息
 export const state = () => ({
-  city: '',
-  cityId: 0,
-  totle:0
+  hotelInfo: {
+    city: '',
+    cityId: ''
+  }
 })
 // 同步设置修改state数据
 export const mutations = {
-  setCity(state,data) {
-    state.city = data
-  },
-  setCityId(state,data) {
-    state.cityId = data
-  },
-  setTotle(state,data){
-    state.totle = data
+  setHotelInfo(state,data) {
+    state.hotelInfo = data
   }
 }
 // 异步设置修改state数据
@@ -29,8 +24,6 @@ export const actions = {
     })
     .then(res => {
       console.log(res,1234567)
-      const {total} = res.data
-      commit('setTotal',total)
     })
   }
 }

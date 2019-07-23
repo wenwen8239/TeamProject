@@ -2,7 +2,7 @@
     <!-- 酒店首页 -->
     <div class="container">
       <!-- 头部搜索组件 -->
-      <HotelSearch @getAllHotelInfo="getAllHotelInfo" @getAllScenics="getAllScenics"/>
+      <HotelSearch @getAllScenics="getAllScenics"/>
       <!-- 酒店介绍模块 -->
       <div class="hotel-option">
         <el-row type="flex">
@@ -141,9 +141,6 @@ export default {
     setTimeout(() => {
       this.loading = false
     },1000)
-  },
-  watch: {
-    // getAllHotelInfo(id)
   },
   methods: {
     // 区域的显示与隐藏
