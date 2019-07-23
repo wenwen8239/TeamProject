@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import myItem from "@/components/post/item.vue";
+import myItem from "@/components/post/itemList.vue";
 export default {
   data() {
     return {

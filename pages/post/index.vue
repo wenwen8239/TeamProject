@@ -42,7 +42,10 @@ export default {
       miansCityData: []
     };
   },
-  mounted() {},
+  mounted() {
+    // console.log(mainsListData,'897');
+    
+  },
   components: {
     PostNav,
     Mains,
