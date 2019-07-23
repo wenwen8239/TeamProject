@@ -43,12 +43,8 @@
 </template>
 
 <script>
-<<<<<<< HEAD
-import myItem from "@/components/post/itemList.vue";
-=======
 import myItem from "@/components/post/item.vue";
 import { setTimeout } from 'timers';
->>>>>>> 23af3a5e17325635aab1600994f4358b201b6f62
 export default {
   data() {
     return {

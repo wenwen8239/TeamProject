@@ -1,15 +1,4 @@
 <template>
-<<<<<<< HEAD
-  <div class="userComments">
-    <p>
-      <img :src="$axios.defaults.baseURL + $store.state.user.userInfo.user.defaultAvatar" alt />
-      <span>54645</span>
-      <span>2019-07-23 9:24</span>
-    </p>
-    <div>
-      <!-- <item :data='data.parent'/> -->
-      你好啊
-=======
   <div class="artc">
     <div class="meg">
       <div class="user">
@@ -35,26 +24,12 @@
         <Item v-if="data.parent!==undefined" :data="data.parent"></Item>
       </li>
       </ul>-->
->>>>>>> 23af3a5e17325635aab1600994f4358b201b6f62
     </div>
   </div>
 </template>
 
 <script>
 export default {
-<<<<<<< HEAD
-  name: "item",
-  // props: {
-  //   data: {
-  //     type: Object,
-  //     defauil: {}
-  //   }
-  // },
-  data() {
-    return {
-      listdata:[]
-    };
-=======
   data() {
     return {};
   },
@@ -68,41 +43,13 @@ export default {
         }
       }
     }
->>>>>>> 23af3a5e17325635aab1600994f4358b201b6f62
   },
   mounted() {
-<<<<<<< HEAD
-    this.$axios({
-      url: "/posts/comments",
-      params: {
-        post: this.$route.query.id
-      }
-    }).then(res => {
-      // console.log(res, 123)
-      if (res.status == 200) {
-        const arr = res.data.data;
-        arr.filter((v) => {
-          v.account
-        })
-      }
-    });
-=======
->>>>>>> 23af3a5e17325635aab1600994f4358b201b6f62
   }
 };
 </script>
 
 <style lang="less" scoped>
-<<<<<<< HEAD
-.userComments {
-  border-bottom: 1px dashed #ddd;
-  padding: 20px 20px 5px;
-  p {
-    img {
-      width: 16px;
-      height: 16px;
-      border-radius: 50%;
-=======
 // 评论
 .artc {
   width: 100%;
@@ -129,7 +76,6 @@ export default {
     }
     .content {
       padding: 0 15px 0 15px;
->>>>>>> 23af3a5e17325635aab1600994f4358b201b6f62
     }
   }
 }
