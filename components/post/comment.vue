@@ -72,16 +72,18 @@ export default {
   },
   methods: {
     //分页
-    handUp(response, file, fileList){
-      console.log(response)
-    },
     handleSizeChange(val) {
       console.log(`每页 ${val} 条`);
     },
     handleCurrentChange(val) {
       console.log(`当前页: ${val}`);
     },
-    //上传图片
+	//上传图片
+	handUp(response, file, fileList){
+		response.forEach(v => {
+			this.addform.pics.push(v)
+		});
+    },
     handleRemove(file, fileList) {
       console.log(file, fileList, "sdas");
     },

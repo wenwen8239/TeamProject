@@ -15,15 +15,6 @@
         </div>
         <div class="pingl">{{data.content}}</div>
       </div>
-      <!-- <ul>
-      <li class="content">
-        <img :src="$axios.defaults.baseURL +data.account.defaultAvatar" alt />
-        <span class="name">{{data.account.nickname}}</span>
-        <span class="time">time</span>
-        <p>{{data.content}}</p>
-        <Item v-if="data.parent!==undefined" :data="data.parent"></Item>
-      </li>
-      </ul>-->
     </div>
   </div>
 </template>
@@ -46,6 +37,7 @@ export default {
   },
   methods: {},
   mounted() {
+    console.log(this.data)
   }
 };
 </script>
