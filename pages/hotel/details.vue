@@ -31,7 +31,7 @@
         </el-col>
         <el-col :span="10" class="pic-right">
           <div v-for="(item,index) in pics" :key="index" >
-            <img :src="item.imgUrl" alt="">
+            <img :src="item.imgUrl" alt="" @click="handleChangeImg(index)">
           </div>
         </el-col>
       </el-row>
@@ -77,7 +77,7 @@
       <!-- 停车服务 -->
       <el-row type="flex">
         <el-col :span="4">停车服务</el-col>
-        <el-col :span="20">免费;提供免费停车位;酒店停车场，免费</el-col>
+        <el-col :span="20">{{hotelInfo.hours}}</el-col>
       </el-row>
       <!-- 品牌信息 -->
       <el-row type="flex">
@@ -136,22 +136,28 @@ export default {
         {imgUrl: 'http://157.122.54.189:9093/images/hotel-pics/5.jpeg'},
         {imgUrl: 'http://157.122.54.189:9093/images/hotel-pics/6.jpeg'}
       ],
-      stars: 3
+      stars: 0
     }
   },
   mounted() {
-    setTimeout(() => {
-      this.$axios({
-        url: '/hotels',
-        params: {
-          id: this.$route.query.id
-        }
-      })
-      .then(res => {
-        const { data } = res.data
-        this.hotelInfo = data[0]
-      })
-    },1)
+    this.$axios({
+      url: '/hotels',
+      params: {
+        id: this.$route.query.id
+      }
+    })
+    .then(res => {
+      const { data } = res.data
+      console.log(data)
+      this.hotelInfo = data[0]
+      this.stars = this.hotelInfo.stars
+    })
+  },
+  methods: {
+    // 点击将小图切换到大图的位置
+    handleChangeImg(index) {
+      this.hotelInfo.photos = this.pics[index].imgUrl
+    }
   }
 }
 </script>

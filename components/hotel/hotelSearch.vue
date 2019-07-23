@@ -99,16 +99,7 @@ export default {
     }
   },
   mounted() {
-    // this.$axios({
-    //   url: '/cities',
-    //   params: {
-    //     name: '深圳'
-    //   }
-    // })
-    // .then(res => {
-    //   const { data } = res.data
-    //   this.cityInfo = data[0]
-    // })
+
   },
   methods: {
     // 封装实现下拉菜单
@@ -153,8 +144,8 @@ export default {
       // 修改路由地址的id
       this.$router.push(`/hotel?city=${item.id}`)
       this.cityPlace = item.value
-      this.$emit('getAllHotelInfo',this.$route.query.city)
       this.$emit('getAllScenics',item.value)
+      this.$store.commit('hotel/setHotelInfo',data)
     }
   }
 }
