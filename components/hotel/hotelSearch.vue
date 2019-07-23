@@ -144,8 +144,10 @@ export default {
       // 修改路由地址的id
       this.$router.push(`/hotel?city=${item.id}`)
       this.cityPlace = item.value
+      // 展示所有数据
+      this.$emit('getAllHotelInfo')
+      // 展示所有景点
       this.$emit('getAllScenics',item.value)
-      this.$store.commit('hotel/setHotelInfo',data)
     }
   }
 }

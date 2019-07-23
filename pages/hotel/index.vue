@@ -2,7 +2,7 @@
     <!-- 酒店首页 -->
     <div class="container">
       <!-- 头部搜索组件 -->
-      <HotelSearch @getAllScenics="getAllScenics"/>
+      <HotelSearch @getAllHotelInfo="getAllHotelInfo" @getAllScenics="getAllScenics"/>
       <!-- 酒店介绍模块 -->
       <div class="hotel-option">
         <el-row type="flex">
