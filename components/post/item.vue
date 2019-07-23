@@ -11,9 +11,10 @@
       </div>
       <div class="content">
         <div class="Digu">
-          <Item v-if="data.parent!==undefined" :data="data.parent"></Item>
+          <div class="pingl">{{data.content}}</div>
+          <Item class="item" v-if="data.parent!==undefined" :data="data.parent"></Item>
         </div>
-        <div class="pingl">{{data.content}}</div>
+
       </div>
     </div>
   </div>
@@ -35,7 +36,6 @@ export default {
       }
     }
   },
-  methods: {},
   mounted() {
     console.log(this.data)
   }
@@ -46,8 +46,13 @@ export default {
 // 评论
 .artc {
   width: 100%;
+  padding: 10px;
+  // border: 1px solid #aaa;
+  border-left: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+  border-top: 1px solid #ddd;
   .meg {
-      // border:1px #999 solid;
+    padding-bottom: 10px;
     .user {
       i {
         img {
@@ -70,6 +75,11 @@ export default {
     .content {
       padding: 0 15px 0 15px;
     }
+  }
+  .item {
+    border: 1px solid #ddd;
+    margin: 10px;
+    width: 95%;
   }
 }
 </style>

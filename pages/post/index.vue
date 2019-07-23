@@ -1,13 +1,13 @@
 <template>
   <el-row class="row-bg index" type="flex" justify="space-around">
     <el-col >
-      <div class="grid-content bg-purple youNav">
+      <div class="grid-content bg-purple zuoNav">
         <!-- 左侧导航栏 -->
         <PostNav @setCityData="setCityData" />
       </div>
     </el-col>
     <el-col >
-      <div class="grid-content bg-purple-light">
+      <div class="grid-content bg-purple-light you">
         <!-- 写游记 -->
         <Mains :data="miansCityData" />
         <!-- 内容 -->
@@ -42,7 +42,10 @@ export default {
       miansCityData: []
     };
   },
-  mounted() {},
+  mounted() {
+    // console.log(mainsListData,'897');
+    
+  },
   components: {
     PostNav,
     Mains,
@@ -64,8 +67,11 @@ export default {
   width: 1000px;
   margin: 0 auto;
   padding-top: 20px;
-  .youNav{
+  .zuoNav{
     width: 260px;
+  }
+  .you{
+    width: 700px;
   }
 }
 </style>

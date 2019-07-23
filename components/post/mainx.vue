@@ -37,7 +37,7 @@
             <img src="../../static/wKgBZ1octoCABhgLAAafahORRLs91.jpeg" alt />
           </nuxt-link>
         </div>
-        <div class="mainx_nei">
+        <div id='xiayi' class="mainx_nei">
           <nuxt-link :to="`/post/detail?id=${item.id}`" class="biao_tou">{{item.title}}</nuxt-link>
           <p>{{item.summary}}</p>
           <el-row type="flex" class="userzhan" justify="space-between">
@@ -56,10 +56,10 @@
               </div>
               <span>
                 <i class="el-icon-view"></i>
-                {{item.watch}}
+                16565
               </span>
             </el-row>
-            <div class="zan">{{item.watch}}赞</div>
+            <div class="zan">431赞</div>
           </el-row>
         </div>
       </el-row>
@@ -140,10 +140,12 @@ export default {
   }
 };
 </script>
-
 <style lang="less" scoped>
 .mainx {
   padding: 20px 0;
+  #xiayi{
+    width: 460px;
+  }
 }
 .mains {
   border-bottom: 1px solid #ddd;
@@ -220,5 +222,9 @@ export default {
       height: 100%;
     }
   }
+}
+.el-pagination {
+  text-align: center;
+  margin: 40px 0 20px;
 }
 </style>

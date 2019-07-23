@@ -30,10 +30,19 @@
       </el-col>
       <el-col class="aside" :span="5">
         <!-- 草稿箱 -->
+        <div class="draft-box">
+          <h4 class="draft-title">草稿箱（0）</h4>
+          <div class="draft-list">
+            <div class="draft-item">
+              <div>123<i class="iconfont el-icon-edit"></i></div>
+              <p>2019-07-20</p>
+            </div>
+          </div>
+        </div>
         <div class="draft-box"
-        v-for="(item,index) in $store.state.post.createForm"
-        :key="index"
-        >
+          v-for="(item,index) in $store.state.post.createForm"
+          :key="index"
+          >
           <h4 class="draft-title">草稿箱（{{index+1}}）</h4>
           <div class="draft-list">
             <div class="draft-item">
@@ -42,6 +51,7 @@
             </div>
           </div>
         </div>
+
       </el-col>
     </el-row>
   </div>
@@ -59,6 +69,7 @@ export default {
   },
   data() {
     return {
+      conmot:true,
       // 表单
       form: {
         title: '',
@@ -128,6 +139,9 @@ export default {
   mounted () {
   },
   methods: {
+    noshow(){
+      this.conmot = false
+    },
        // 封装实现下拉菜单
     querySearch(value) {
       return new Promise((resolve,reject) => {
@@ -166,15 +180,17 @@ export default {
 
     // 保存到草稿箱
     saveDraft() {
+      this.conmot = false
       this.form.content = this.$refs.vueEditor.editor.root.innerHTML
       const arr = {...this.form}
       this.draftForm = arr
       this.$store.commit('post/setInfoData',this.draftForm)
 
-      
+
     },
     // 编辑草稿箱信息
     editDraft(item,index) {
+      // this.conmot = false
       this.form.title = item.title
       this.form.city = item.city
       this.$refs.vueEditor.editor.root.innerHTML = item.content
@@ -182,6 +198,7 @@ export default {
     },
     // 发布新攻略
     handleSubmit() {
+      this.conmot = false
       const {
         user: { userInfo }
       } = this.$store.state;
@@ -194,7 +211,7 @@ export default {
         }
       }).then((res) => {
         console.log(res);
-        
+
         if(res.status == 200){
           this.$message({
           message:res.data.message,
