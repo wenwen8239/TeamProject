@@ -2,9 +2,11 @@ export const state = () => {
   return {
     createForm:[
       {
-        title: '123',
-        content: '456',
-        city: '广州'
+        title: '',
+        content: '',
+        city: '',
+        departCity: "广州",
+        departCode: "CAN"
       }
     ]
   }

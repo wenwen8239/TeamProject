@@ -51,6 +51,7 @@
             </div>
           </div>
         </div>
+
       </el-col>
     </el-row>
   </div>
@@ -68,6 +69,7 @@ export default {
   },
   data() {
     return {
+      conmot:true,
       // 表单
       form: {
         title: '',
@@ -137,6 +139,9 @@ export default {
   mounted () {
   },
   methods: {
+    noshow(){
+      this.conmot = false
+    },
        // 封装实现下拉菜单
     querySearch(value) {
       return new Promise((resolve,reject) => {
@@ -175,6 +180,7 @@ export default {
 
     // 保存到草稿箱
     saveDraft() {
+      this.conmot = false
       this.form.content = this.$refs.vueEditor.editor.root.innerHTML
       const arr = {...this.form}
       this.draftForm = arr
@@ -184,6 +190,7 @@ export default {
     },
     // 编辑草稿箱信息
     editDraft(item,index) {
+      // this.conmot = false
       this.form.title = item.title
       this.form.city = item.city
       this.$refs.vueEditor.editor.root.innerHTML = item.content
@@ -191,6 +198,7 @@ export default {
     },
     // 发布新攻略
     handleSubmit() {
+      this.conmot = false
       const {
         user: { userInfo }
       } = this.$store.state;
