@@ -20,14 +20,15 @@ export const mutations = {
 // 异步设置修改state数据
 export const actions = {
   // 获取所有酒店数据
-  getAllHotel({commit},id) {
+  getAllHotel({commit},data) {
     return this.$axios({
       url: '/hotels',
       params: {
-        city: id
+        city: data
       }
     })
     .then(res => {
+      console.log(res,1234567)
       const {total} = res.data
       commit('setTotal',total)
     })

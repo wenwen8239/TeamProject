@@ -107,6 +107,8 @@ export default {
       isrotate: true,
       // 页面数据
       hotelInfo: [],
+      // 缓存另一份页面数据
+      catchHotelInfo: [],
       // 总条数
       total: 0,
       // 当前页码
@@ -133,14 +135,12 @@ export default {
     // 设置默认的路由城市id
     this.$router.push('/hotel?city=199')
     setTimeout(() => {
-      var id = parseInt(this.$route.query.city);
-      this.getAllHotelInfo(id)
+      this.getAllHotelInfo()
       this.getAllScenics('深圳')
     },1)
     setTimeout(() => {
       this.loading = false
     },1000)
-    console.log(this.$store.state.total,678769879)
   },
   watch: {
     // getAllHotelInfo(id)
@@ -158,23 +158,24 @@ export default {
       }
     },
     // 封装获取页面数据
-    getAllHotelInfo(id) {
+    getAllHotelInfo() {
+      let id = parseInt(this.$route.query.city);
       // 获取对应城市酒店信息
       this.$axios({
         url: `/hotels`,
         params: {
           city: id,
-          _limit: 22,
-          _start: this.pageIndex
+          _start: this.pageIndex,
+          _limit: 999
         }
       })
       .then(res => {
+        console.log(res)
         const {data} = res.data
         // 设置酒店数据
         this.hotelInfo = data
         // 设置总条数
         this.total = res.data.total
-        
       })
     },
     // 封装获取景点
@@ -199,6 +200,12 @@ export default {
     // 切换当前页
     handleCurrentChange(val) {
       this.pageIndex = val;
+    },
+    // 设置筛选后的数据
+    changeHotelOptions(arr) {
+      this.catchHotelInfo = arr
+      // 重新设置总条数
+      this.total = arr.length
     },
     // 筛选价格数据
     changePrice(value) {

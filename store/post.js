@@ -16,5 +16,5 @@ export const mutations = {
   delInfoData(state, data) {
     state.createForm.splice(data,1)
   },
- 
+
 }

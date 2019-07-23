@@ -66,10 +66,8 @@ export default {
       url: '/hotels/options'
     })
     .then(res => {
-      console.log(res,12345678)
       const {data} = res.data;
       this.filtersData = data
-      console.log(data)
     })
   },
   methods: {
