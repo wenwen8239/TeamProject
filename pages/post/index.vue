@@ -1,18 +1,34 @@
 <template>
-  <div class="index">
+  <el-row class="row-bg index" type="flex" justify="space-around">
+    <el-col >
+      <div class="grid-content bg-purple youNav">
+        <!-- 左侧导航栏 -->
+        <PostNav @setCityData="setCityData" />
+      </div>
+    </el-col>
+    <el-col >
+      <div class="grid-content bg-purple-light">
+        <!-- 写游记 -->
+        <Mains :data="miansCityData" />
+        <!-- 内容 -->
+        <Mainx @setListData="setListData" />
+      </div>
+    </el-col>
+  </el-row>
+  <!-- <div class="index">
     <el-container>
       <el-aside width="260px">
-        <!-- 左侧导航栏 -->
-        <PostNav @setCityData='setCityData'/>
+        左侧导航栏
+        <PostNav @setCityData="setCityData" />
       </el-aside>
-      <el-main id='you' width="700px">
-        <!-- 写游记 -->
-        <Mains :data='miansCityData'/>
-        <!-- 内容 -->
-        <Mainx @setListData='setListData'/>
+      <el-main id="you" width="700px">
+        写游记
+        <Mains :data="miansCityData" />
+        内容
+        <Mainx @setListData="setListData" />
       </el-main>
     </el-container>
-  </div>
+  </div> -->
 </template>
 
 <script>
@@ -22,35 +38,35 @@ import Mainx from "@/components/post/mainx.vue";
 export default {
   data() {
     return {
-      mainsListData:[
-
-      ],
-      miansCityData:[]
+      mainsListData: [],
+      miansCityData: []
     };
   },
-  mounted () {
-  },
+  mounted() {},
   components: {
     PostNav,
     Mains,
     Mainx
   },
   methods: {
-    setListData(arr){
-      this.mainsListData = arr
+    setListData(arr) {
+      this.mainsListData = arr;
     },
-    setCityData(arr){
-      this.miansCityData = arr
+    setCityData(arr) {
+      this.miansCityData = arr;
     }
   }
 };
 </script>
 
 <style lang="less" scoped>
-  section{
-    width: 1000px;
-    margin: 0 auto;
-    padding-top: 20px;
+.index {
+  width: 1000px;
+  margin: 0 auto;
+  padding-top: 20px;
+  .youNav{
+    width: 260px;
   }
+}
 </style>
 

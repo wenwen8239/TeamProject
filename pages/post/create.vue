@@ -193,6 +193,8 @@ export default {
           Authorization: `Bearer ${userInfo.token || "NO TOKEN"}`
         }
       }).then((res) => {
+        console.log(res);
+        
         if(res.status == 200){
           this.$message({
           message:res.data.message,

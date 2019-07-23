@@ -69,12 +69,13 @@ export default {
   border: 1px solid #ddd;
   border-bottom: none;
   border-right: none;
+  position: relative;
   .nei {
-  width: 350px;
+  width: 330px;
   background: #fff;
   position: absolute;
-  top: 81px;
-  left: 277px;
+  top: -1px;
+  left: 259px;
   border: 1px solid #ddd;
   border-left: none;
   z-index: 4;
