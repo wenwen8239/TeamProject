@@ -30,10 +30,19 @@
       </el-col>
       <el-col class="aside" :span="5">
         <!-- 草稿箱 -->
+        <div class="draft-box">
+          <h4 class="draft-title">草稿箱（0）</h4>
+          <div class="draft-list">
+            <div class="draft-item">
+              <div>123<i class="iconfont el-icon-edit"></i></div>
+              <p>2019-07-20</p>
+            </div>
+          </div>
+        </div>
         <div class="draft-box"
-        v-for="(item,index) in $store.state.post.createForm"
-        :key="index"
-        >
+          v-for="(item,index) in $store.state.post.createForm"
+          :key="index"
+          >
           <h4 class="draft-title">草稿箱（{{index+1}}）</h4>
           <div class="draft-list">
             <div class="draft-item">
@@ -171,7 +180,7 @@ export default {
       this.draftForm = arr
       this.$store.commit('post/setInfoData',this.draftForm)
 
-      
+
     },
     // 编辑草稿箱信息
     editDraft(item,index) {
@@ -194,7 +203,7 @@ export default {
         }
       }).then((res) => {
         console.log(res);
-        
+
         if(res.status == 200){
           this.$message({
           message:res.data.message,

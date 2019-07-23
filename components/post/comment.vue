@@ -184,12 +184,19 @@ export default {
   // 评论
   .yangS {
     width: 100%;
-    border: 1px #999 solid;
+    margin-bottom: 10px;
     .imt {
-      border-bottom: 1px #666 dashed;
       padding: 20px 20px 5px;
       box-sizing: border-box;
+      &:last-child {
+        border-bottom: 1px solid #ddd;
+      }
     }
+  }
+  // 分页
+  .el-pagination {
+    margin: 20px 0;
+    text-align: center;
   }
 }
 </style>

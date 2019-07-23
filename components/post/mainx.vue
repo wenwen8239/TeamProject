@@ -221,4 +221,8 @@ export default {
     }
   }
 }
+.el-pagination {
+  text-align: center;
+  margin: 40px 0 20px;
+}
 </style>

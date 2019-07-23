@@ -75,6 +75,7 @@
       <HotelListFilter @changePrice="changePrice" @changeLevel="changeLevel" @changeType="changeType"/>
       <!-- 引入酒店列表模块 -->
       <HotelList v-for="(item,index) in dataList" :key="index" :data="item" v-loading="loading"/>
+      <div v-if="total === 0" class="condition">暂无符合条件的酒店</div>
       <!-- 实现分页功能 -->
       <el-pagination
         @size-change="handleSizeChange"
@@ -324,6 +325,10 @@ export default {
     .el-pagination {
       text-align: right;
       margin-top: 20px;
+    }
+    .condition {
+      text-align: center;
+      padding: 30px 0;
     }
   }
 </style>

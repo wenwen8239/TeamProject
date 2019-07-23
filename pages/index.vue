@@ -33,7 +33,7 @@ export default {
       banners: [],
       // tab栏信息
       tabs: [
-        {title: '攻略', placeholder: '搜索城市', pageUrl: '/post?city='},
+        {title: '攻略', placeholder: '搜索城市', pageUrl: '/post'},
         {title: '酒店', placeholder: '请输入城市搜索酒店', pageUrl: '/hotel?city='},
         {title: '机票', placeholder: '', pageUrl: '/air'}
       ],

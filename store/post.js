@@ -1,6 +1,12 @@
 export const state = () => {
   return {
-    createForm:[]
+    createForm:[
+      {
+        title: '123',
+        content: '456',
+        city: '广州'
+      }
+    ]
   }
 }
 
